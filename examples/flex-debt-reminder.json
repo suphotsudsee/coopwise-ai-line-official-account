@@ -1,0 +1,56 @@
+{
+  "user_id": "Uxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+  "alt_text": "แจ้งเตือนกำหนดชำระ",
+  "contents": {
+    "type": "bubble",
+    "header": {
+      "type": "box",
+      "layout": "vertical",
+      "contents": [
+        {
+          "type": "text",
+          "text": "CoopWise AI",
+          "weight": "bold",
+          "color": "#FFFFFF"
+        }
+      ],
+      "backgroundColor": "#176B5B"
+    },
+    "body": {
+      "type": "box",
+      "layout": "vertical",
+      "spacing": "md",
+      "contents": [
+        {
+          "type": "text",
+          "text": "แจ้งเตือนกำหนดชำระ",
+          "weight": "bold",
+          "size": "xl"
+        },
+        {
+          "type": "text",
+          "text": "กรุณาตรวจสอบรายละเอียดอย่างปลอดภัยในระบบสมาชิก",
+          "wrap": true,
+          "color": "#555555"
+        }
+      ]
+    },
+    "footer": {
+      "type": "box",
+      "layout": "vertical",
+      "contents": [
+        {
+          "type": "button",
+          "style": "primary",
+          "color": "#176B5B",
+          "action": {
+            "type": "uri",
+            "label": "เปิดระบบสมาชิก",
+            "uri": "https://coop.example.com/member"
+          }
+        }
+      ]
+    }
+  }
+}
+
