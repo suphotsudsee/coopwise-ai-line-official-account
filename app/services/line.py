@@ -69,6 +69,17 @@ class LineMessagingService:
             notification_disabled=notification_disabled,
         )
 
+    async def reply_text(self, *, reply_token: str, text: str) -> None:
+        response = await self._client.post(
+            "/v2/bot/message/reply",
+            json={
+                "replyToken": reply_token,
+                "messages": [{"type": "text", "text": text}],
+            },
+        )
+        if response.status_code >= 400:
+            raise LineMessagingError(response.status_code, _response_detail(response))
+
     async def _push(
         self,
         *,

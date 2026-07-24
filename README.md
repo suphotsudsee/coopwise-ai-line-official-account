@@ -136,3 +136,24 @@ docker compose config
 - เพิ่ม persistent queue/outbox ก่อนใช้งานแจ้งเตือนจำนวนมาก
 - สำรองและทดสอบขั้นตอน revoke/rotate Channel Access Token
 
+## Rich Menu สำหรับงานคำนวณ
+
+Rich Menu มี 6 รายการ: ค่างวดสินเชื่อ, ภาระหนี้, เงินปันผล, ดอกเบี้ยเงินฝาก,
+สรุปรายการ และวิธีใช้งาน ปุ่มต่าง ๆ ใช้ postback action และเปิดแป้นพิมพ์พร้อม
+แบบฟอร์มให้ผู้ใช้กรอก จากนั้น webhook จะคำนวณและตอบกลับด้วย reply message
+
+สร้างภาพเมนูใหม่:
+
+```bash
+python scripts/render_rich_menu.py
+```
+
+ตรวจสอบ `assets/rich-menu.png` แล้วติดตั้งเป็น Default Rich Menu:
+
+```bash
+LINE_CHANNEL_ACCESS_TOKEN=YOUR_TOKEN python scripts/install_rich_menu.py
+```
+
+การคำนวณเป็นข้อมูลเบื้องต้นเท่านั้น ยังไม่เชื่อมข้อมูลสมาชิกหรือใช้แทนการอนุมัติ
+สินเชื่อ การเชื่อมยอดหนี้จริงต้องเพิ่มการยืนยันตัวตน การให้ความยินยอม และ audit trail
+ก่อนใช้งานจริง

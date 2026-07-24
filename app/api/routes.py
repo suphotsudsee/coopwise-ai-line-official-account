@@ -13,6 +13,7 @@ from app.schemas import (
 )
 from app.security import require_internal_api_key, verify_line_signature
 from app.services.line import LineMessagingError, LineMessagingService
+from app.services.menu import WELCOME_TEXT, reply_for_postback, reply_for_text
 
 logger = logging.getLogger(__name__)
 router = APIRouter()
@@ -52,6 +53,7 @@ async def readiness(request: Request) -> HealthStatus:
 async def line_webhook(
     request: Request,
     settings: SettingsDependency,
+    service: LineServiceDependency,
     x_line_signature: Annotated[str | None, Header()] = None,
 ) -> dict[str, str]:
     body = await request.body()
@@ -71,13 +73,35 @@ async def line_webhook(
     for event in events:
         if isinstance(event, dict):
             source = event.get("source", {})
+            event_type = event.get("type")
             logger.info(
                 "LINE webhook event received",
                 extra={
-                    "line_event_type": event.get("type"),
+                    "line_event_type": event_type,
                     "line_source_type": source.get("type") if isinstance(source, dict) else None,
                 },
             )
+            reply_token = event.get("replyToken")
+            reply_text: str | None = None
+            if event_type == "follow":
+                reply_text = WELCOME_TEXT
+            elif event_type == "postback":
+                postback = event.get("postback", {})
+                if isinstance(postback, dict):
+                    reply_text = reply_for_postback(str(postback.get("data", "")))
+            elif event_type == "message":
+                message = event.get("message", {})
+                if isinstance(message, dict) and message.get("type") == "text":
+                    reply_text = reply_for_text(str(message.get("text", "")))
+
+            if isinstance(reply_token, str) and reply_text:
+                try:
+                    await service.reply_text(reply_token=reply_token, text=reply_text)
+                except LineMessagingError as exc:
+                    logger.warning(
+                        "LINE webhook reply failed",
+                        extra={"line_status_code": exc.status_code},
+                    )
     return {"status": "ok"}
 
 

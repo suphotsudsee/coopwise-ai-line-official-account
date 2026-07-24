@@ -14,6 +14,9 @@ from app.main import create_app
 
 
 class FakeLineService:
+    def __init__(self) -> None:
+        self.replies: list[dict[str, object]] = []
+
     async def push_text(self, **kwargs: object) -> str:
         self.last_text = kwargs
         return "11111111-1111-4111-8111-111111111111"
@@ -21,6 +24,9 @@ class FakeLineService:
     async def push_flex(self, **kwargs: object) -> str:
         self.last_flex = kwargs
         return "22222222-2222-4222-8222-222222222222"
+
+    async def reply_text(self, **kwargs: object) -> None:
+        self.replies.append(kwargs)
 
 
 @pytest.fixture
