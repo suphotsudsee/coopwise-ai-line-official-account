@@ -1,0 +1,75 @@
+{
+  "size": {
+    "width": 2500,
+    "height": 1686
+  },
+  "selected": true,
+  "name": "CoopWise AI Services",
+  "chatBarText": "เมนู CoopWise",
+  "areas": [
+    {
+      "bounds": {"x": 0, "y": 0, "width": 833, "height": 843},
+      "action": {
+        "type": "postback",
+        "label": "คำนวณค่างวด",
+        "data": "action=loan_payment",
+        "displayText": "คำนวณค่างวดสินเชื่อ",
+        "inputOption": "openKeyboard",
+        "fillInText": "ค่างวด\nเงินต้น: \nดอกเบี้ยต่อปี: \nจำนวนเดือน: "
+      }
+    },
+    {
+      "bounds": {"x": 833, "y": 0, "width": 833, "height": 843},
+      "action": {
+        "type": "postback",
+        "label": "ประเมินภาระหนี้",
+        "data": "action=debt_capacity",
+        "displayText": "ประเมินภาระหนี้",
+        "inputOption": "openKeyboard",
+        "fillInText": "ภาระหนี้\nรายได้ต่อเดือน: \nค่าใช้จ่ายต่อเดือน: \nหนี้เดิมต่อเดือน: \nค่างวดใหม่: "
+      }
+    },
+    {
+      "bounds": {"x": 1666, "y": 0, "width": 834, "height": 843},
+      "action": {
+        "type": "postback",
+        "label": "คำนวณเงินปันผล",
+        "data": "action=dividend",
+        "displayText": "คำนวณเงินปันผล",
+        "inputOption": "openKeyboard",
+        "fillInText": "ปันผล\nทุนเรือนหุ้นเฉลี่ย: \nอัตราปันผล: "
+      }
+    },
+    {
+      "bounds": {"x": 0, "y": 843, "width": 833, "height": 843},
+      "action": {
+        "type": "postback",
+        "label": "ดอกเบี้ยเงินฝาก",
+        "data": "action=deposit_interest",
+        "displayText": "คำนวณดอกเบี้ยเงินฝาก",
+        "inputOption": "openKeyboard",
+        "fillInText": "ดอกเบี้ยฝาก\nเงินต้น: \nดอกเบี้ยต่อปี: \nจำนวนวัน: "
+      }
+    },
+    {
+      "bounds": {"x": 833, "y": 843, "width": 833, "height": 843},
+      "action": {
+        "type": "postback",
+        "label": "สรุปรายการ",
+        "data": "action=summary",
+        "displayText": "สรุปรายการตัวเลข",
+        "inputOption": "openKeyboard",
+        "fillInText": "สรุปรายการ\nรายการ:\n"
+      }
+    },
+    {
+      "bounds": {"x": 1666, "y": 843, "width": 834, "height": 843},
+      "action": {
+        "type": "postback",
+        "label": "วิธีใช้งาน",
+        "data": "action=help",
+        "displayText": "วิธีใช้งาน CoopWise AI"
+      }
+    }
+  ]
+}
